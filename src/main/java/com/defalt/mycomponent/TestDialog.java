@@ -7,6 +7,7 @@ package com.defalt.mycomponent;
 
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,21 +15,20 @@ import java.awt.GridLayout;
  */
 public class TestDialog extends javax.swing.JDialog {
 
+    private final ArrayList<Product> productList;
+
     /**
      * Creates new form TestDialog
      */
     public TestDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        int productSize=7;
+        productList = Product.genProductList();
+        int productSize=productList.size();
         productPanel.setLayout(new GridLayout(productSize/2+productSize%2,2));
-        productPanel.add(new ProductPanel());
-        productPanel.add(new ProductPanel());
-        productPanel.add(new ProductPanel());
-        productPanel.add(new ProductPanel());
-        productPanel.add(new ProductPanel());
-        productPanel.add(new ProductPanel());
-        productPanel.add(new ProductPanel());
+        for(Product product:productList){
+            productPanel.add(new ProductPanel(product));
+        }
         
     }
 

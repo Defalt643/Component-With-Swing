@@ -5,6 +5,8 @@
  */
 package com.defalt.mycomponent;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ming
@@ -57,5 +59,17 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + '}';
+    }public static ArrayList<Product> genProductList(){
+        ArrayList<Product> list = new ArrayList<>();
+        list.add(new Product(1,"Espresso 1",40,"1.jpg"));
+        list.add(new Product(2,"Espresso 2",30,"2.jpg"));
+        list.add(new Product(3,"Espresso 3",40,"3.jpg"));
+        list.add(new Product(4,"Americano 1",30,"1.jpg"));
+        list.add(new Product(5,"Americano 2",40,"2.jpg"));
+        list.add(new Product(1,"Americano 3",50,"3.jpg"));
+        list.add(new Product(1,"Ice Tea 1",40,"1.jpg"));
+        list.add(new Product(1,"Ice Tea 2",40,"2.jpg"));
+        list.add(new Product(1,"Ice Tea 3",40,"3.jpg"));
+        return list;
     }
 }
