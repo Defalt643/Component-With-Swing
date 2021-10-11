@@ -42,7 +42,6 @@ public class ProductPanel extends javax.swing.JPanel {
     public void setProduct(Product product1) {
         productName.setText(product1.getName());
         productPrice.setText(Double.toString(product1.getPrice()));
-        imageButton.setText(product1.getImage());
         productAmount.setText(Integer.toString(amount));
         loadImage();
     }
@@ -63,11 +62,15 @@ public class ProductPanel extends javax.swing.JPanel {
         productName = new javax.swing.JLabel();
         productPrice = new javax.swing.JLabel();
 
-        imageButton.setText("Image");
         imageButton.setMaximumSize(new java.awt.Dimension(200, 200));
         imageButton.setMinimumSize(new java.awt.Dimension(200, 200));
         imageButton.setName(""); // NOI18N
         imageButton.setPreferredSize(new java.awt.Dimension(200, 200));
+        imageButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imageButtonActionPerformed(evt);
+            }
+        });
 
         productAmount.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         productAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -162,6 +165,10 @@ public class ProductPanel extends javax.swing.JPanel {
         amount++;
         productAmount.setText(Integer.toString(amount));
     }//GEN-LAST:event_plusButtonActionPerformed
+
+    private void imageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageButtonActionPerformed
+        System.out.println("Product Panel:"+product+"Amount: "+amount);
+    }//GEN-LAST:event_imageButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
