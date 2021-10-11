@@ -5,6 +5,7 @@
  */
 package com.defalt.mycomponent;
 
+import com.defalt.mycomponent.ProductPanel.OnBuyProductListener;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author ming
  */
-public class TestDialog extends javax.swing.JDialog {
+public class TestDialog extends javax.swing.JDialog implements OnBuyProductListener{
 
     private final ArrayList<Product> productList;
 
@@ -27,7 +28,10 @@ public class TestDialog extends javax.swing.JDialog {
         int productSize=productList.size();
         productPanel.setLayout(new GridLayout(productSize/2+productSize%2,2));
         for(Product product:productList){
-            productPanel.add(new ProductPanel(product));
+            ProductPanel p = new ProductPanel(product);
+            p.addOnBuyProductListener(this);
+            productPanel.add(p);
+            
         }
         
     }
@@ -43,11 +47,15 @@ public class TestDialog extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         productPanel = new javax.swing.JPanel();
+        productInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         productPanel.setLayout(new java.awt.GridLayout(10, 2));
         jScrollPane1.setViewportView(productPanel);
+
+        productInfo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        productInfo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -55,14 +63,18 @@ public class TestDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(productInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -113,6 +125,13 @@ public class TestDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel productInfo;
     private javax.swing.JPanel productPanel;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void buy(Product product, int amount) {
+        System.out.println("Test Dialog "+product+" amount: "+amount);
+        productInfo.setText("Test Dialog "+product+" amount: "+amount);
+    }
 }
